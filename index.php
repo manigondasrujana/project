@@ -3,7 +3,6 @@
 ini_set('display_errors', 'On');
 error_reporting(E_ALL);
 
-	//CLASS INSTANTIATION
 class Manage {
 	//ATTEMPTS TO LOAD THE CLASS Manage
 	public static function autoload($class) {
@@ -104,25 +103,25 @@ class htmlTable extends page {
 public function get() {
 $filePath = $_GET['csvFile'];
         //OPENS THE URL SPECIFIED IN $filepath
-        $f = fopen("$filePath", "r"); 
+        $file = fopen("$filePath", "r"); 
 	//TABLE STYLE
-        $x ='<table border = "1" bordercolor = "red"><tr>';
+        $data ='<table border = "2" bordercolor = "blue green"><tr>';
 	//Here fgetcsv parse CSV file as an array
-        while (($line = fgetcsv($f)) !== false) { 
+        while (($line = fgetcsv($file)) !== false) { 
         for ($i=0; $i < sizeof($line) ; $i++) {             
         $row = $line[$i];
         $cells = explode(";",$row); 
         foreach ($cells as $cell) {
-	$x.= "<td> $cell </td>";
+	$data.= "<td> $cell </td>";
 	}
 	}
-	$x.= "</tr>";
+	$data.= "</tr>";
 	}
-	echo "Here is your CSV file in the Table format";
-   	$x.= '</table>';
+	echo "<h1> Here is your CSV file in the Table format </h1>";
+   	$data.= '</table>';
         //closes the open file
-        fclose($f); 
-        $this->html.= $x;
+        fclose($file); 
+        $this->html.= $data;
 	}
 	}
 	?>
