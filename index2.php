@@ -36,10 +36,21 @@
 	//DETERMINING IF THE VARIABLE PAGE IS SET AND IS NOT NULLL
 	if(isset($_REQUEST['page']))
 	        {
-		           $requestPage = $_REQUEST['page'];
+	        $requestPage = $_REQUEST['page'];
 		}
+	//CREATE A NEW INSTANCE OF 'UPLOADFORM' INTO $PAGE
+	$page = new uploadform();
+
+	if($_SERVER['REQUEST_METHOD'] == 'GET') {
+	//CALLING METHODS OF THE $PAGE ACCEPT $ DISPLAY
+	$page->accept();
+	} else {
+	$page->display();
 	}
 
-	{
+	}
+
+
+	
 ?>
 
