@@ -48,7 +48,7 @@ abstract class page {
 	echo $this->html;
 	}
 	public function get() {
-        echo 'default get message';
+        echo 'hi this is get function';
 	}
 	public function post() {
 	print_r($_POST);
@@ -77,7 +77,7 @@ class uploadform extends page
 	//REDIRECTING TO THE NEXT PAGE BY USING HEADER
 	header::redirect($target_file);
         } else {
-        echo "Sorry, there was an error uploading your file.";
+        echo "The file can't be uploaded.";
         }
         }  
 	}   
@@ -91,7 +91,7 @@ class header {
 class staticfunction {
 	//CONTENT AND DESIGN OF FIRST WEB PAGE
         public static function createform() {
-	$form = '<h1>Upload Form</h1>';
+	$form = '<h1> This is my Project1, to display csv file into table format</h1>';
 	$form.= '<form action="index.php?page=uploadform" method="post" enctype="multipart/form-data">';
 	$form .= '<input type="file" name="fileToUpload" id="fileToUpload">';
         $form .= '<br> <hr> <input type="submit" value="Upload Your CSV File " name="submit"> </br> </hr>';
@@ -100,8 +100,8 @@ class staticfunction {
 	}
 }
 class htmlTable extends page {
-public function get() {
-$filePath = $_GET['csvFile'];
+	public function get() {
+	$filePath = $_GET['csvFile'];
         //OPENS THE URL SPECIFIED IN $filepath
         $file = fopen("$filePath", "r"); 
 	//TABLE STYLE
@@ -118,11 +118,11 @@ $filePath = $_GET['csvFile'];
 	$data.= "</tr>";
 	}
 	echo "<h1> Here is your CSV file in the Table format </h1>";
-   	$data.= '</table>';
-        //closes the open file
-        fclose($file); 
-        $this->html.= $data;
-	}
+  	$data.= '</table>';
+      //closes the open file
+       fclose($file); 
+       $this->html.= $data;
+}
 	}
 	?>
 
