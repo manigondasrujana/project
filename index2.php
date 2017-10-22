@@ -14,7 +14,19 @@
 	//DISPLAY ERRORS
 	ini_set('display_errors', 'On');
 	error_reporting(E_ALL);
-
-
+	
+	//CLASS INSTANTIATION
+	class Autoload{
+	//ATTEMPTS TO LOAD THE CLASS AUTOLOAD
+	public static function autoload($class) {
+	//ENABLING CLASSES TO LOAD AUTOMATICALLY
+	spl_autoload_register(array('Autoload', 'autoload') {
+	include $class_name . '.php';
+	});
+	$obj  = new main();
+	include $class . '.php';
+	}
+	
+	}
 ?>
 
