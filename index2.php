@@ -1,82 +1,72 @@
-<html>
-<head>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-	<form action="" method="post" enctype="multipart/form-data">
-	<h1>This is PROJECT1</h1>
-	<input type="file" name="fileToUpload" id="fileToUpload">
-	<input type="submit" value="Upload File" name="submit"">
-	<p>CHOOSE CSV FILE TO UPLOAD</p>
-</body>
-</html>
+
 <?php
 	//DISPLAY ERRORS
 	ini_set('display_errors', 'On');
 	error_reporting(E_ALL);
 	
 	//CLASS INSTANTIATION
-class Autoload{
+	$obt = new main();
+class Manage {
 	//ATTEMPTS TO LOAD THE CLASS AUTOLOAD
 	public static function autoload($class) {
 	//ENABLING CLASSES TO LOAD AUTOMATICALLY
-	spl_autoload_register(array('Autoload', 'autoload') {
-	include $class_name . '.php';
-	});
-	$obj  = new main();
 	include $class . '.php';
 	}
 	
 	}
+	spl_autoload_register(array('Manage', 'autoload'));
 
-class main{
+class main
+{
 	function __construct{
 	//DEFAULT PAGE
-	$requestPage = 'uploadform';
+	$requestPage = 'uploadForm';
 	//DETERMINING IF THE VARIABLE PAGE IS SET AND IS NOT NULLL
 	if(isset($_REQUEST['page']))
 	        {
 	        $requestPage = $_REQUEST['page'];
 		}
 	//CREATE A NEW INSTANCE OF 'UPLOADFORM' INTO $PAGE
-	$page = new uploadform();
+	$page = new $requestPage;
 
 	if($_SERVER['REQUEST_METHOD'] == 'GET') {
 	//CALLING METHODS OF THE $PAGE RECEIVE AND SHOW
-	$page->receive
+	$page->receive();
 	} else {
 	$page->show();
 	}
+	}
+	}
 abstract class page {
     	protected $html;
-        public function __construct()
+        function __construct()
 	    {
-            $this->html .= '<html>';
-            $this->html .= '<link rel="stylesheet" href="html.css">';
-	    $this->html .= '<body>';
+            $this->html .= '<html><head>';
+            $this->html .= '<link rel="stylesheet" href="styles.css">';
+	    $this->html .= '</head><body>';
 	    }
-	public function __destruct()
+	function __destruct()
 	    {
 	    $this->html .= '</body></html>';
-	    echo $this->html;
+	    stringFunctions::echoString($this->html);
 	    }
-	public function receive()
-	{
-	echo "this is function RECEIVE";
-	}
-	public function show()
-	{
-	print_r($_POST);
-	}
+	
 	}
 	//INHERITS THE METHODS OF 'PAGE' TO 'UPLOADFORM'
-	class uploadform extends page
+class uploadForm extends page
 	{
 	//
-	public function receive()
+	function receive()
 	{
-	 $form = "<form action='index.php?page=uploadform' method='post' enctype='multipart/form-data'>";
-	 $this->html.=$form;
+	$form = '<form action="index2.php?page=uploadForm" method='post' enctype='multipart/form-data'>';
+	$form .= '<h1>Select CSV file to upload</h1>';
+	$form .= '<br>';
+	$form .= '<br>';
+	$form .= '<input type="file" name="fileToUpload" id="fileToUpload">';
+	
+	$form .= '<input type="submit" value="Upload File" name="submit">';
+	$form .= '</form>';
+	$this->html.=$form;
 	}
 	//
 	function show()
@@ -95,10 +85,51 @@ abstract class page {
 	} else {											                   	   //upload file
 	if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 	echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";
-        header("Location:index.php?page=htmlTable&file=$target_file");
+        header('Location:index2.php?page=htmlTable&file=' $target_file);
 	}
 	}
 	}
 	}
 	}
-	
+class htmlTable extends page
+{
+        function receive()
+        {i
+	$fileName = $_REQUEST['file'];
+	$handle = fopen($fileName, "r");
+	echo '<table>';
+	//display header row if true
+	if (true) {
+	$csvcontents = fgetcsv($handle);
+	echo '<tr>';
+	foreach ($csvcontents as $headercolumn) {
+	echo "<th>$headercolumn</th>";
+	}
+	echo '</tr>';
+
+}
+															    // displaying contents
+															   while ($csvcontents = fgetcsv($handle))
+{														   
+
+echo '<tr>';
+foreach ($csvcontents as $column) 
+{
+echo "<td>$column</td>";
+}
+echo'</tr>';
+}
+echo '</table>';
+}
+}
+
+class stringFunctions
+{
+
+static function echoString($string)
+{
+echo $string;
+
+}
+}
+?>
