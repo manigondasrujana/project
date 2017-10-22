@@ -95,8 +95,8 @@ class staticfunction {
 	$form = '<h1>Upload Form</h1>';
 	$form.= '<form action="index.php?page=uploadform" method="post" enctype="multipart/form-data">';
 	$form .= '<input type="file" name="fileToUpload" id="fileToUpload">';
-        $form .= '<br> <hr> <input type="submit" value="Upload Image" name="submit"> </br> </hr>';
-	$form .= '</form> ';
+        $form .= '<br> <hr> <input type="submit" value="Upload Your CSV File " name="submit"> </br> </hr>';
+        $form .= '</form> ';
 	return $form;
 	}
 }
