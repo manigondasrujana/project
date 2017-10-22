@@ -94,7 +94,7 @@ class staticfunction {
         public static function createform() {
 	$form = '<h1>Upload Form</h1>';
 	$form.= '<form action="index.php?page=uploadform" method="post" enctype="multipart/form-data">';
-        $form .= '<input type="file" name="fileToUpload" id="fileToUpload">';
+	$form .= '<input type="file" name="fileToUpload" id="fileToUpload">';
         $form .= '<br> <hr> <input type="submit" value="Upload Image" name="submit"> </br> </hr>';
 	$form .= '</form> ';
 	return $form;
@@ -118,7 +118,7 @@ $filePath = $_GET['csvFile'];
 	}
 	$x.= "</tr>";
 	}
-	 echo "Here is your CSV file in Table format";
+	echo "Here is your CSV file in the Table format";
    	$x.= '</table>';
         //closes the open file
         fclose($f); 
